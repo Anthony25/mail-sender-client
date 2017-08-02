@@ -1,0 +1,95 @@
+Mail Sender Client
+==================
+
+Client for [Mail Sender Daemon][mail-sender-daemon].
+
+Related to the [Uber coding challenge][uber-challenge-instructions].
+
+
+Installation
+------------
+
+Clone this repository, and run:
+
+```
+pip3 install -e .
+```
+
+Usage
+-----
+
+Run the application by calling `mail-sender-client`:
+
+```
+$ mail-sender-client -h
+usage: mail-sender-client [-h] {send,s,valid,v} ...
+
+Send mails through Mail Sender
+
+positional arguments:
+  {send,s,valid,v}
+    send (s)        send mail
+    valid (v)       email validation
+
+optional arguments:
+  -h, --help        show this help message and exit
+```
+
+### Send
+
+Subcommand allowing to send a email.
+
+```
+$ mail-sender-client send -h
+usage: mail-sender-client send [-h] [-f src] -t address [address ...]
+                               [-c [address [address ...]]]
+                               [-b [address [address ...]]]
+                               [-r [address [address ...]]] [-s SUBJECT]
+                               [-T TEXT] [-H HTML]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f src, --from src    sender's name (address is chosen automatically by Mail
+                        Sender Daemon)
+  -t address [address ...], --to address [address ...]
+                        Receivers addresses
+  -c [address [address ...]], --cc [address [address ...]]
+                        Carbon Copy addresses
+  -b [address [address ...]], --bcc [address [address ...]]
+                        blind carbon copy addresses
+  -r [address [address ...]], --reply_to [address [address ...]]
+                        Reply-To addresses
+  -s SUBJECT, --subject SUBJECT
+                        Subject
+  -T TEXT, --text TEXT  Text content
+  -H HTML, --html HTML  HTML content
+```
+
+### Email validation
+
+Subcommand handling the email validation. By default, some providers could
+block any non-whitelisted address. It is possible to either check or
+validate an address on every provider supporting this feature.
+
+```
+$ mail-sender-client valid -h
+usage: mail-sender-client valid [-h] [-c] address
+
+positional arguments:
+  address      email address
+
+optional arguments:
+  -h, --help   show this help message and exit
+  -c, --check  check an email validation status on all compatible providers
+```
+
+
+License
+-------
+
+Tool under the GPLv3 license. Do not hesitate to report bugs, ask me some
+questions or do some pull request if you want to!
+
+
+[mail-sender-daemon]: https://github.com/Anthony25/mail-sender-daemon
+[uber-challenge-instructions]: https://github.com/uber/coding-challenge-tools/blob/master/coding_challenge.md#email-service
